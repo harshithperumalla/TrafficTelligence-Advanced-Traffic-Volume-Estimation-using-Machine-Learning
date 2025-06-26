@@ -1,0 +1,15 @@
+# encoder_create.py
+import pandas as pd
+from sklearn.preprocessing import LabelEncoder
+import pickle
+
+# Sample column to encode (modify based on your dataset)
+data = pd.read_csv('traffic volume.csv.csv')  # Replace with your actual dataset
+encoder = LabelEncoder()
+data['weather_main_encoded'] = encoder.fit_transform(data['weather_main'])
+
+# Save encoder
+with open('encoder.pkl', 'wb') as f:
+    pickle.dump(encoder, f)
+
+print("Encoder saved successfully.")
