@@ -1,0 +1,18 @@
+from sklearn.linear_model import LinearRegression
+from sklearn.preprocessing import LabelEncoder
+import pandas as pd
+import pickle
+
+data = pd.read_csv('traffic volume.csv.csv')
+data['weather_encoded'] = LabelEncoder().fit_transform(data['weather_main'])
+
+X = data[['weather_encoded', 'hour', 'is_holiday']]
+y = data['traffic_volume']
+
+model = LinearRegression()
+model.fit(X, y)
+
+with open('model.pkl', 'wb') as f:
+    pickle.dump(model, f)
+
+print("✅ Model saved as model.pkl")
